@@ -1,0 +1,5 @@
+/*calls the myCanvas class */
+.pong {
+    /* gives the canvas a black background */
+    background-color: black;
+}

@@ -16,8 +16,8 @@ class Element {
         this.width = options.width;
         this.height = options.height;
         this.color = options.color;
-        this.speed = options.x || 2;
-        this.gravity = options.x;
+        this.speed = options.speed || 2;
+        this.gravity = options.gravity;
     }
 }
 //Makes player one
@@ -45,7 +45,7 @@ const ball = new Element({
     width: 20,
     height: 20,
     color: "white",
-    speed: 1,
+    speed: 3,
     gravity: 1,
 });
 //Creates the function to draw the element
@@ -55,7 +55,7 @@ function drawElement(element) {
 };
 //Creates the function to show the score for player one
 function showScoreOne() {
-    ctx.font = "30px Arial";
+    ctx.font = "30px";
     ctx.fillStyle = "red";
     ctx.fillText(scoreOne, canvas.width / 2 - 75, 40);
 };
@@ -64,6 +64,30 @@ function showScoreTwo() {
     ctx.font = "30px Arial";
     ctx.fillStyle = "blue";
     ctx.fillText(scoreTwo, canvas.width / 2 + 75, 40);
+};
+//Makes the ball counce
+function bounce() {
+    if(ball.y + ball.gravity <= 0 || ball.y + ball.gravity >= canvas.height) {
+        ball.gravity  = ball.gravity * -1;
+        ball.y += ball.gravity;
+        ball.x += ball.speed;
+    } else {
+        ball.y += ball.gravity;
+        ball.x += ball.speed;
+    };
+    wallCollision();
+};
+//Detects collision between the ball and the walls of the game
+function wallCollision() {
+    if(ball.x + ball.speed <= 0 || ball.x + ball.speed + ball.width >= canvas.width) {
+        ball.y += ball.gravity;
+        ball.speed = ball.speed * -1;
+        ball.x += ball.speed;
+    } else {
+        ball.y += ball.gravity;
+        ball.x += ball.speed;
+    }
+    drawElements();
 };
 //Creates a function that draws all elements
 function drawElements() {
@@ -76,8 +100,8 @@ function drawElements() {
 };
 //Creates a function that keeps drawing everything
 function loop() {
-    drawElements();
+    bounce();
     window.requestAnimationFrame(loop);
-}
+};
 //Calls the loop function
 loop();

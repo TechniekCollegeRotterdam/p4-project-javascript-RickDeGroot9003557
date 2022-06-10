@@ -131,3 +131,4 @@ function loop() {
 //Calls the loop function
 loop();
 // alweer goed gebruik van comments
+// zorg dat je tegelijk je stiks kan bewegen

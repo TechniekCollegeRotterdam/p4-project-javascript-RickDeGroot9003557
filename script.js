@@ -33,6 +33,7 @@ function doKeyDown(e) {
 
 //A constructor so we can create our elements
 class Element {
+    // je maakt goed gebruik van comment je kan zo terug lezen wat je hebt gedaan
     constructor(options) {
         this.x = options.x;
         this.y = options.y;

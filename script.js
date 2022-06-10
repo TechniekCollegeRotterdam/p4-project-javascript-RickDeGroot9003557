@@ -132,3 +132,4 @@ function loop() {
 loop();
 // alweer goed gebruik van comments
 // zorg dat je tegelijk je stiks kan bewegen
+// je code is heel overzichtelijk goed werk

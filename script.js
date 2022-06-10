@@ -8,6 +8,29 @@ canvas.height = 500;
 //Sets the starting variables for the scores for player one and two
 let scoreOne = 0;
 let scoreTwo = 0;
+//Adds key movement to the screen
+window.addEventListener("keypress", doKeyDown, false);
+//If specific key is pressed, move down or up
+function doKeyDown(e) {
+    const key = e.key;
+    //If w key is pressed, player one moves up
+    if(key == "w" && playerOne.y - playerOne.gravity > 0) {
+        playerOne.y -= playerOne.gravity * 5;
+    }
+    //If s key is pressed, player one moves down
+    else if(key == "s" && playerOne.y + playerOne.height+ playerOne.gravity < canvas.height) {
+        playerOne.y -= playerOne.gravity * -5;
+    }
+    //if key is pressed, player two moves up
+    if(key == "i" && playerTwo.y - playerTwo.gravity > 0) {
+        playerTwo.y -= playerTwo.gravity * 5;
+    }
+    //if key is pressed, player two moves down
+    else if(key == "k" && playerTwo.y + playerTwo.height+ playerTwo.gravity < canvas.height) {
+        playerTwo.y -= playerTwo.gravity * -5;
+    }
+}
+
 //A constructor so we can create our elements
 class Element {
     constructor(options) {

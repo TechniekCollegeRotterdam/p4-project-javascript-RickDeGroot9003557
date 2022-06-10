@@ -33,6 +33,7 @@ function doKeyDown(e) {
 
 //A constructor so we can create our elements
 class Element {
+    // je maakt goed gebruik van comment je kan zo terug lezen wat je hebt gedaan
     constructor(options) {
         this.x = options.x;
         this.y = options.y;
@@ -73,6 +74,7 @@ const ball = new Element({
 });
 //Creates the function to draw the element
 function drawElement(element) {
+    // maak je functie in de nieuwe variant (owen)
     ctx.fillStyle = element.color;
     ctx.fillRect(element.x, element.y, element.width, element.height);
 };
@@ -128,3 +130,6 @@ function loop() {
 };
 //Calls the loop function
 loop();
+// alweer goed gebruik van comments
+// zorg dat je tegelijk je stiks kan bewegen
+// je code is heel overzichtelijk goed werk

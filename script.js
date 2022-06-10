@@ -74,6 +74,7 @@ const ball = new Element({
 });
 //Creates the function to draw the element
 function drawElement(element) {
+    // maak je functie in de nieuwe variant (owen)
     ctx.fillStyle = element.color;
     ctx.fillRect(element.x, element.y, element.width, element.height);
 };

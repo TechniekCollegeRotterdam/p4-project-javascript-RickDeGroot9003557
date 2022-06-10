@@ -130,3 +130,4 @@ function loop() {
 };
 //Calls the loop function
 loop();
+// alweer goed gebruik van comments

@@ -90,35 +90,38 @@ function showScoreTwo() {
 };
 //Makes the ball counce
 function bounce() {
-    if(ball.y + ball.gravity <= 0 || ball.y + ball.gravity >= canvas.height) {
-        ball.gravity  = ball.gravity * -1;
+    if(ball.y + ball.height >= canvas.height) {
+        ball.gravity = ball.gravity * -1;
         ball.y += ball.gravity;
         ball.x += ball.speed;
+    } else if(ball.y + ball.gravity <= 0){
+        ball.gravity = ball.gravity * -1;
     } else {
         ball.y += ball.gravity;
         ball.x += ball.speed;
     };
     wallCollision();
 };
-//Detects collision between the ball and the walls of the game
+//Detects collision
 function wallCollision() {
-    if((ball.y + ball.gravity <= playerTwo.y + playerTwo.height 
-        && ball.x + ball.width + ball.speed >= playerTwo.x
-        && ball.y + ball.gravity > playerTwo.y)
-        || (ball.y + ball.gravity > playerOne.y
-        && ball.x + ball.speed <= playerOne.x + playerOne.width)) {
-            ball.speed = ball.speed * -1;
+    if((ball.y < playerTwo.y + playerTwo.height 
+        && ball.x + ball.width >= playerTwo.x
+        && ball.y + ball.height > playerTwo.y)
+        || (ball.y < playerOne.y + playerOne.height
+        && ball.x <= playerOne.x + playerOne.width
+        && ball.y + ball.height > playerOne.y)) {
+            ball.speed = ball.speed * -1.2;
         //Adds score for player two if the ball goes past player one
-        } else if (ball.x + ball.speed < playerOne.x) {
+        } else if (ball.x < playerOne.x) {
             scoreTwo += 1;
-            ball.speed = ball.speed * -1;
-            ball.x = 396.25 + ball.speed;
+            ball.speed = 3 * -1;
+            ball.x = 396.25;
             ball.y += ball.gravity;
         //Adds score for player one if the ball goes past player two
-        } else if(ball.x + ball.speed > playerTwo.x + playerTwo.width) {
+        } else if(ball.x > playerTwo.x + playerTwo.width) {
             scoreOne += 1;
-            ball.speed = ball.speed * -1;
-            ball.x = 396.25 + ball.speed;
+            ball.speed = 3 * -1;
+            ball.x = 396.25;
             ball.y += ball.gravity;
         }
     drawElements();

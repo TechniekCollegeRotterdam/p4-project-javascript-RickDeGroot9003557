@@ -102,14 +102,25 @@ function bounce() {
 };
 //Detects collision between the ball and the walls of the game
 function wallCollision() {
-    if(ball.x + ball.speed <= 0 || ball.x + ball.speed + ball.width >= canvas.width) {
-        ball.y += ball.gravity;
-        ball.speed = ball.speed * -1;
-        ball.x += ball.speed;
-    } else {
-        ball.y += ball.gravity;
-        ball.x += ball.speed;
-    }
+    if((ball.y + ball.gravity <= playerTwo.y + playerTwo.height 
+        && ball.x + ball.width + ball.speed >= playerTwo.x
+        && ball.y + ball.gravity > playerTwo.y)
+        || (ball.y + ball.gravity > playerOne.y
+        && ball.x + ball.speed <= playerOne.x + playerOne.width)) {
+            ball.speed = ball.speed * -1;
+        //Adds score for player two if the ball goes past player one
+        } else if (ball.x + ball.speed < playerOne.x) {
+            scoreTwo += 1;
+            ball.speed = ball.speed * -1;
+            ball.x = 396.25 + ball.speed;
+            ball.y += ball.gravity;
+        //Adds score for player one if the ball goes past player two
+        } else if(ball.x + ball.speed > playerTwo.x + playerTwo.width) {
+            scoreOne += 1;
+            ball.speed = ball.speed * -1;
+            ball.x = 396.25 + ball.speed;
+            ball.y += ball.gravity;
+        }
     drawElements();
 };
 //Creates a function that draws all elements

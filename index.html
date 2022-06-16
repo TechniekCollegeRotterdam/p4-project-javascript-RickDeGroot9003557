@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- links the css stylesheet and this html file -->
+    <!-- Links the css stylesheet and this html file -->
     <link rel="stylesheet" href="style.css" />
     <title>Document</title>
 </head>
 <body>
-    <!-- creates the canvas in which the game is going to be played and created-->
+    <div id="startScreen" class="startScreen">
+        <canvas id="startScreenCanvas" class="startScreenCanvas"></canvas>
+    </div>
+    <!-- Creates the canvas in which the game is going to be played and created-->
+    <div id="gameScreen" class="gameScreen">
         <canvas id="pong" class="pong"></canvas>
-    <!-- links the javascript and this html file -->
+    </div>
+    <!-- Start button-->
+    <div id="startButton">
+        <button class="startButton" onclick="startGame()">Start</button>
+    </div>    
+    <!-- Links the javascript and this html file -->
     <script src="script.js"></script>
 </body>
 </html>

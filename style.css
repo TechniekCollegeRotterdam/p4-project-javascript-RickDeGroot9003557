@@ -5,3 +5,34 @@
     position: relative;
     left: 20%;
 }
+.startButton {
+        /*centers text*/
+        text-align: center;
+        /*Creates red border*/
+        border: 2px solid red;
+        /*Border radius*/
+        border-radius: 7px;
+        /*Background color for the button*/
+        background-color: white;
+        /*Textcolor*/
+        color: red;
+        /*Font size*/
+        font-size: 32px;
+        /*Button width*/
+        width: 5em;
+        /*Sets the margin*/
+        margin: 5px auto;
+        /*Sets the position*/
+        position: absolute;
+        left: 41%;
+        top: 200px;
+}
+/*Makes it so game isnt shows before button press*/
+.gameScreen {
+    display: none;
+}
+.startScreenCanvas {
+    background-color: black;
+    position: relative;
+    left: 20%;
+}

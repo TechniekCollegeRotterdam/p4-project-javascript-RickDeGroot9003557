@@ -1,10 +1,13 @@
 //Creates a variable containing the id of the canvas
 const canvas = document.getElementById("pong");
+const startScreenCanvas = document.getElementById("startScreenCanvas");
 //Creates a variable with the 2D rendering context for drawing on the canvas
 const ctx = canvas.getContext("2d");
 //Sets the width and height of the canvas 
 canvas.width = 812.5;
 canvas.height = 500;
+startScreenCanvas.width = canvas.width;
+startScreenCanvas.height = canvas.height;
 //Sets the starting variables for the scores for player one and two
 let scoreOne = 0;
 let scoreTwo = 0;
@@ -14,19 +17,19 @@ window.addEventListener("keypress", doKeyDown, false);
 function doKeyDown(e) {
     const key = e.key;
     //If w key is pressed, player one moves up
-    if(key == "w" && playerOne.y - playerOne.gravity > 0) {
+    if(key == "w" && playerOne.y - playerOne.gravity > 10) {
         playerOne.y -= playerOne.gravity * 5;
     }
     //If s key is pressed, player one moves down
-    else if(key == "s" && playerOne.y + playerOne.height+ playerOne.gravity < canvas.height) {
+    else if(key == "s" && playerOne.y + playerOne.height + playerOne.gravity < 490) {
         playerOne.y -= playerOne.gravity * -5;
     }
     //if key is pressed, player two moves up
-    if(key == "i" && playerTwo.y - playerTwo.gravity > 0) {
+    if(key == "i" && playerTwo.y - playerTwo.gravity > 10) {
         playerTwo.y -= playerTwo.gravity * 5;
     }
     //if key is pressed, player two moves down
-    else if(key == "k" && playerTwo.y + playerTwo.height+ playerTwo.gravity < canvas.height) {
+    else if(key == "k" && playerTwo.y + playerTwo.height + playerTwo.gravity < 490) {
         playerTwo.y -= playerTwo.gravity * -5;
     }
 }
@@ -54,7 +57,7 @@ const playerOne = new Element({
 });
 //Makes player two
 const playerTwo = new Element({
-    x: 782.5,
+    x: 777.5,
     y: 200,
     width: 20,
     height: 100,
@@ -86,15 +89,33 @@ function showScoreOne() {
 function showScoreTwo() {
     ctx.font = "30px Arial";
     ctx.fillStyle = "blue";
-    ctx.fillText(scoreTwo, canvas.width / 2 + 75, 40);
+    ctx.fillText(scoreTwo, canvas.width / 2 + 60, 40);
+};
+//Draws a white line all around the canvas
+function box() {
+    ctx.beginPath();
+    ctx.setLineDash([])
+    ctx.lineStyle = "white";
+    ctx.rect(10,10,792.5,480);
+    ctx.stroke();
+}
+//Makes the dashed line / net in the middle of the screen
+function dashedLine() {
+    ctx.beginPath();
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 5;
+    ctx.setLineDash([20, 20]);
+    ctx.moveTo(406.25, 20);
+    ctx.lineTo(406.25, 490);
+    ctx.stroke();
 };
 //Makes the ball counce
 function bounce() {
-    if(ball.y + ball.height >= canvas.height) {
+    if(ball.y + ball.height >= 490) {
         ball.gravity = ball.gravity * -1;
         ball.y += ball.gravity;
         ball.x += ball.speed;
-    } else if(ball.y + ball.gravity <= 0){
+    } else if(ball.y + ball.gravity <= 10){
         ball.gravity = ball.gravity * -1;
     } else {
         ball.y += ball.gravity;
@@ -110,19 +131,17 @@ function wallCollision() {
         || (ball.y < playerOne.y + playerOne.height
         && ball.x <= playerOne.x + playerOne.width
         && ball.y + ball.height > playerOne.y)) {
-            ball.speed = ball.speed * -1.2;
+            ball.speed = ball.speed * -1.1;
         //Adds score for player two if the ball goes past player one
         } else if (ball.x < playerOne.x) {
             scoreTwo += 1;
             ball.speed = 3 * -1;
             ball.x = 396.25;
-            ball.y += ball.gravity;
         //Adds score for player one if the ball goes past player two
-        } else if(ball.x > playerTwo.x + playerTwo.width) {
+        } else if(ball.x + ball.width > playerTwo.x + playerTwo.width) {
             scoreOne += 1;
             ball.speed = 3 * -1;
             ball.x = 396.25;
-            ball.y += ball.gravity;
         }
     drawElements();
 };
@@ -134,11 +153,21 @@ function drawElements() {
     drawElement(ball);
     showScoreOne();
     showScoreTwo();
+    box();
+    dashedLine();
 };
 //Creates a function that keeps drawing everything
 function loop() {
     bounce();
     window.requestAnimationFrame(loop);
 };
-//Calls the loop function
-loop();
+//Starts the game
+function startGame() {
+    //Makes button invisble
+    document.getElementById("startButton").style.display = "none";
+    //Makes game visible
+    document.getElementById("gameScreen").style.display = "block";
+    //Starts game loop
+    document.getElementById("startScreen").style.display = "none";
+    loop();
+}

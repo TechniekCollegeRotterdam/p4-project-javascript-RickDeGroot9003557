@@ -121,7 +121,7 @@ function pause() {
         console.log(paused);
         window.requestAnimationFrame(loop);
     }
-}
+};
 //Makes the ball counce
 function bounce() {
     if(ball.y + ball.height >= 490) {
@@ -180,9 +180,11 @@ function loop() {
 function startGame() {
     //Makes start button invisble
     document.getElementById("startButton").style.display = "none";
+    //
+    document.getElementsByClassName("pauseButton")[0].style.display = "block";
     //Makes game visible
     document.getElementById("gameScreen").style.display = "block";
     //Starts game loop
     document.getElementById("startScreen").style.display = "none";
     loop();
-}
+};

@@ -46,6 +46,7 @@
     position: absolute;
     left: 44.8%;
     top: 3%;
+    /*Sets initial display to invisible since the game hasnt started yet*/
     display: none;
 }
 /*Makes it so game isnt shows before button press*/

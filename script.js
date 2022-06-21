@@ -34,7 +34,7 @@ function doKeyDown(e) {
     else if(key == "k" && playerTwo.y + playerTwo.height + playerTwo.gravity < 490) {
         playerTwo.y -= playerTwo.gravity * -5;
     }
-}
+};
 
 //A constructor so we can create our elements
 class Element {
@@ -111,14 +111,12 @@ function dashedLine() {
     ctx.lineTo(406.25, 490);
     ctx.stroke();
 };
-//Sets paused to true, pausing the game
+//If the button is pressed and the game isnt paused, pause the game, if its pressed and the game is paused, continue game.
 function pause() {
     if(!paused) {
         paused = true;
-        console.log(paused);
     } else if(paused) {
         paused = false;
-        console.log(paused);
         window.requestAnimationFrame(loop);
     }
 };
@@ -180,7 +178,7 @@ function loop() {
 function startGame() {
     //Makes start button invisble
     document.getElementById("startButton").style.display = "none";
-    //
+    //Makes the pauze button visible
     document.getElementsByClassName("pauseButton")[0].style.display = "block";
     //Makes game visible
     document.getElementById("gameScreen").style.display = "block";

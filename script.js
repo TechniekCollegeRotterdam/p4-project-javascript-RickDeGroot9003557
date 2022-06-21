@@ -11,6 +11,8 @@ startScreenCanvas.height = canvas.height;
 //Sets the starting variables for the scores for player one and two
 let scoreOne = 0;
 let scoreTwo = 0;
+//Pause game variable
+paused = false;
 //Adds key movement to the screen
 window.addEventListener("keypress", doKeyDown, false);
 //If specific key is pressed, move down or up
@@ -109,6 +111,17 @@ function dashedLine() {
     ctx.lineTo(406.25, 490);
     ctx.stroke();
 };
+//Sets paused to true, pausing the game
+function pause() {
+    if(!paused) {
+        paused = true;
+        console.log(paused);
+    } else if(paused) {
+        paused = false;
+        console.log(paused);
+        window.requestAnimationFrame(loop);
+    }
+}
 //Makes the ball counce
 function bounce() {
     if(ball.y + ball.height >= 490) {
@@ -131,7 +144,7 @@ function wallCollision() {
         || (ball.y < playerOne.y + playerOne.height
         && ball.x <= playerOne.x + playerOne.width
         && ball.y + ball.height > playerOne.y)) {
-            ball.speed = ball.speed * -1.1;
+            ball.speed = ball.speed * -1.15;
         //Adds score for player two if the ball goes past player one
         } else if (ball.x < playerOne.x) {
             scoreTwo += 1;
@@ -158,12 +171,14 @@ function drawElements() {
 };
 //Creates a function that keeps drawing everything
 function loop() {
-    bounce();
-    window.requestAnimationFrame(loop);
+    if(!paused) {
+        bounce();
+        window.requestAnimationFrame(loop);
+    }
 };
 //Starts the game
 function startGame() {
-    //Makes button invisble
+    //Makes start button invisble
     document.getElementById("startButton").style.display = "none";
     //Makes game visible
     document.getElementById("gameScreen").style.display = "block";

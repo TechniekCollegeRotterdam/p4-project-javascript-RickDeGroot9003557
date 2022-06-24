@@ -5,54 +5,58 @@
     position: relative;
     left: 20%;
 }
+
 .startButton {
-        /*centers text*/
-        text-align: center;
-        /*Creates red border*/
-        border: 2px solid red;
-        /*Border radius*/
-        border-radius: 7px;
-        /*Background color for the button*/
-        background-color: white;
-        /*Textcolor*/
-        color: red;
-        /*Font size*/
-        font-size: 32px;
-        /*Button width*/
-        width: 5em;
-        /*Sets the margin*/
-        margin: 5px auto;
-        /*Sets the position*/
-        position: absolute;
-        left: 41.5%;
-        top: 200px;
+    /*centers text*/
+    text-align: center;
+    /*Creates red border*/
+    border: 2px solid red;
+    /*Border radius*/
+    border-radius: 7px;
+    /*Background color for the button*/
+    background-color: white;
+    /*Textcolor*/
+    color: red;
+    /*Font size*/
+    font-size: 32px;
+    /*Button width*/
+    width: 5em;
+    /*Sets the margin*/
+    margin: 5px auto;
+    /*Sets the position*/
+    position: absolute;
+    left: 41.5%;
+    top: 200px;
 }
+
 .pauseButton {
-     /*centers text*/
-     text-align: center;
-     /*Creates red border*/
-     border: 2px solid red;
-     /*Border radius*/
-     border-radius: 7px;
-     /*Background color for the button*/
-     background-color: white;
-     /*Textcolor*/
-     color: red;
-     /*Font size*/
-     font-size: 15px;
-     /*Sets the margin*/
-     margin: 5px auto;
-     /*Sets the position*/
+    /*centers text*/
+    text-align: center;
+    /*Creates red border*/
+    border: 2px solid red;
+    /*Border radius*/
+    border-radius: 7px;
+    /*Background color for the button*/
+    background-color: white;
+    /*Textcolor*/
+    color: red;
+    /*Font size*/
+    font-size: 15px;
+    /*Sets the margin*/
+    margin: 5px auto;
+    /*Sets the position*/
     position: absolute;
     left: 44.8%;
     top: 3%;
     /*Sets initial display to invisible since the game hasnt started yet*/
     display: none;
 }
+
 /*Makes it so game isnt shows before button press*/
 .gameScreen {
     display: none;
 }
+
 .startScreenCanvas {
     background-color: black;
     position: relative;

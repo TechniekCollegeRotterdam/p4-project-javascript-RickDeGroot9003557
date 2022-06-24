@@ -19,22 +19,22 @@ window.addEventListener("keypress", doKeyDown, false);
 function doKeyDown(e) {
     const key = e.key;
     //If w key is pressed, player one moves up
-    if(key == "w" && playerOne.y - playerOne.gravity > 10) {
+    if (key == "w" && playerOne.y - playerOne.gravity > 10) {
         playerOne.y -= playerOne.gravity * 5;
     }
     //If s key is pressed, player one moves down
-    else if(key == "s" && playerOne.y + playerOne.height + playerOne.gravity < 490) {
+    else if (key == "s" && playerOne.y + playerOne.height + playerOne.gravity < 490) {
         playerOne.y -= playerOne.gravity * -5;
     }
     //if key is pressed, player two moves up
-    if(key == "i" && playerTwo.y - playerTwo.gravity > 10) {
+    if (key == "i" && playerTwo.y - playerTwo.gravity > 10) {
         playerTwo.y -= playerTwo.gravity * 5;
     }
     //if key is pressed, player two moves down
-    else if(key == "k" && playerTwo.y + playerTwo.height + playerTwo.gravity < 490) {
+    else if (key == "k" && playerTwo.y + playerTwo.height + playerTwo.gravity < 490) {
         playerTwo.y -= playerTwo.gravity * -5;
     }
-};
+}
 
 //A constructor so we can create our elements
 class Element {
@@ -56,7 +56,7 @@ const playerOne = new Element({
     height: 100,
     color: "red",
     gravity: 2,
-});
+})
 //Makes player two
 const playerTwo = new Element({
     x: 777.5,
@@ -65,7 +65,7 @@ const playerTwo = new Element({
     height: 100,
     color: "blue",
     gravity: 2,
-});
+})
 //Makes the ball
 const ball = new Element({
     x: 396.25,
@@ -75,30 +75,30 @@ const ball = new Element({
     color: "white",
     speed: 3,
     gravity: 1,
-});
+})
 //Creates the function to draw the element
 function drawElement(element) {
     ctx.fillStyle = element.color;
     ctx.fillRect(element.x, element.y, element.width, element.height);
-};
+}
 //Creates the function to show the score for player one
 function showScoreOne() {
     ctx.font = "30px";
     ctx.fillStyle = "red";
     ctx.fillText(scoreOne, canvas.width / 2 - 75, 40);
-};
+}
 //creates the function to show the score for player two
 function showScoreTwo() {
     ctx.font = "30px Arial";
     ctx.fillStyle = "blue";
     ctx.fillText(scoreTwo, canvas.width / 2 + 60, 40);
-};
+}
 //Draws a white line all around the canvas
 function box() {
     ctx.beginPath();
     ctx.setLineDash([])
     ctx.lineStyle = "white";
-    ctx.rect(10,10,792.5,480);
+    ctx.rect(10, 10, 792.5, 480);
     ctx.stroke();
 }
 //Makes the dashed line / net in the middle of the screen
@@ -110,52 +110,52 @@ function dashedLine() {
     ctx.moveTo(406.25, 20);
     ctx.lineTo(406.25, 490);
     ctx.stroke();
-};
+}
 //If the button is pressed and the game isnt paused, pause the game, if its pressed and the game is paused, continue game.
 function pause() {
-    if(!paused) {
+    if (!paused) {
         paused = true;
-    } else if(paused) {
+    } else if (paused) {
         paused = false;
         window.requestAnimationFrame(loop);
     }
-};
+}
 //Makes the ball counce
 function bounce() {
-    if(ball.y + ball.height >= 490) {
+    if (ball.y + ball.height >= 490) {
         ball.gravity = ball.gravity * -1;
         ball.y += ball.gravity;
         ball.x += ball.speed;
-    } else if(ball.y + ball.gravity <= 10){
+    } else if (ball.y + ball.gravity <= 10) {
         ball.gravity = ball.gravity * -1;
     } else {
         ball.y += ball.gravity;
         ball.x += ball.speed;
     };
     wallCollision();
-};
+}
 //Detects collision
 function wallCollision() {
-    if((ball.y < playerTwo.y + playerTwo.height 
-        && ball.x + ball.width >= playerTwo.x
-        && ball.y + ball.height > playerTwo.y)
-        || (ball.y < playerOne.y + playerOne.height
-        && ball.x <= playerOne.x + playerOne.width
-        && ball.y + ball.height > playerOne.y)) {
-            ball.speed = ball.speed * -1.15;
+    if ((ball.y < playerTwo.y + playerTwo.height &&
+            ball.x + ball.width >= playerTwo.x &&
+            ball.y + ball.height > playerTwo.y) ||
+        (ball.y < playerOne.y + playerOne.height &&
+            ball.x <= playerOne.x + playerOne.width &&
+            ball.y + ball.height > playerOne.y)) {
+        ball.speed = ball.speed * -1.15;
         //Adds score for player two if the ball goes past player one
-        } else if (ball.x < playerOne.x) {
-            scoreTwo += 1;
-            ball.speed = 3 * -1;
-            ball.x = 396.25;
+    } else if (ball.x < playerOne.x) {
+        scoreTwo += 1;
+        ball.speed = 3 * -1;
+        ball.x = 396.25;
         //Adds score for player one if the ball goes past player two
-        } else if(ball.x + ball.width > playerTwo.x + playerTwo.width) {
-            scoreOne += 1;
-            ball.speed = 3 * -1;
-            ball.x = 396.25;
-        }
+    } else if (ball.x + ball.width > playerTwo.x + playerTwo.width) {
+        scoreOne += 1;
+        ball.speed = 3 * -1;
+        ball.x = 396.25;
+    }
     drawElements();
-};
+}
 //Creates a function that draws all elements
 function drawElements() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -166,14 +166,14 @@ function drawElements() {
     showScoreTwo();
     box();
     dashedLine();
-};
+}
 //Creates a function that keeps drawing everything
 function loop() {
-    if(!paused) {
+    if (!paused) {
         bounce();
         window.requestAnimationFrame(loop);
     }
-};
+}
 //Starts the game
 function startGame() {
     //Makes start button invisble
@@ -185,4 +185,4 @@ function startGame() {
     //Starts game loop
     document.getElementById("startScreen").style.display = "none";
     loop();
-};
+}
